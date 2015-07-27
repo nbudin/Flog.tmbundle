@@ -18,6 +18,8 @@ else
   begin
     flog = Flog.new(quiet: true, continue: true)
     flog.flog ENV['TM_FILEPATH']
+    
+    system ENV['TM_MATE'], "--clear-mark=warning"
 
     flog.each_by_score Flog::THRESHOLD do |class_method, score, call_list|
       next unless score >= COMPLEXITY_WARNING_THRESHOLD
