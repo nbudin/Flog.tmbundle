@@ -7,6 +7,8 @@ rescue LoadError
   exit 1
 end
 
+COMPLEXITY_WARNING_THRESHOLD = 25
+
 if ARGV.include? '-d'
   require 'flog_cli'
   flog_cli = FlogCLI.new
@@ -18,6 +20,8 @@ else
     flog.flog ENV['TM_FILEPATH']
 
     flog.each_by_score Flog::THRESHOLD do |class_method, score, call_list|
+      next unless score >= COMPLEXITY_WARNING_THRESHOLD
+      
       location = flog.method_locations[class_method]
       line = location && location.gsub(/.*:/, '')
   
