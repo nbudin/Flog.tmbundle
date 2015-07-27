@@ -16,19 +16,19 @@ if ARGV.include? '-d'
   flog_cli.report
 else
   begin
-    flog = Flog.new(quiet: true, continue: true)
+    flog = Flog.new(quiet: true, continue: true, all: true)
     flog.flog ENV['TM_FILEPATH']
     
     system ENV['TM_MATE'], "--clear-mark=warning"
 
-    flog.each_by_score Flog::THRESHOLD do |class_method, score, call_list|
+    flog.each_by_score do |class_method, score, call_list|
       next unless score >= COMPLEXITY_WARNING_THRESHOLD
       
       location = flog.method_locations[class_method]
       line = location && location.gsub(/.*:/, '')
-  
+
       if line
-        message = "Flog score: %0.2f" % [score]
+        message = "Method #{class_method} complexity: %0.2f" % [score]
         system ENV['TM_MATE'], "--line=#{line}", "--clear-mark=warning", "--set-mark=warning:#{message}"
       end
     end
