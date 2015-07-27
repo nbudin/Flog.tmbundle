@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>contactEmailRot13</key>
+	<string>angohqva@tznvy.pbz</string>
+	<key>contactName</key>
+	<string>Nat Budin</string>
+	<key>description</key>
+	<string>Run Flog on your Ruby code automatically.</string>
+	<key>name</key>
+	<string>Flog</string>
+	<key>uuid</key>
+	<string>D2D30E7A-418F-4556-A458-41D1247A14D8</string>
+</dict>
+</plist>
