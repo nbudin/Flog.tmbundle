@@ -9,7 +9,8 @@ end
 
 COMPLEXITY_THRESHOLDS = {
   note: 25,
-  warning: 50
+  warning: 50,
+  error: 100
 }
 
 if ARGV.include? '-d'
@@ -23,7 +24,7 @@ else
     flog.flog ENV['TM_FILEPATH']
     
     COMPLEXITY_THRESHOLDS.keys.each do |level|
-      system ENV['TM_MATE'], "--clear-mark=#{level}"
+      system ENV['TM_MATE'], "--clear-mark=#{level}", ENV['TM_FILEPATH']
     end
 
     flog.each_by_score do |class_method, score, call_list|
@@ -35,7 +36,7 @@ else
 
       if line
         message = "#{class_method} complexity: %0.2f" % [score]
-        system ENV['TM_MATE'], "--line=#{line}", "--set-mark=#{level}:#{message}"
+        system ENV['TM_MATE'], "--line=#{line}", "--set-mark=#{level}:#{message}", ENV['TM_FILEPATH']
       end
     end
   rescue Racc::ParseError
